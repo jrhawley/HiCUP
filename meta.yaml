@@ -1,0 +1,39 @@
+{% set name = "HiCUP" %}
+{% set version = "0.7.2" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/jrhawley/HiCUP.git
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - perl==5.26.2
+    - perl-extutils-makemaker
+  run:
+    - perl
+
+test:
+  shell:
+    - which hicup
+    - which hicup_truncater
+    - which hicup_digester
+    - which hicup_filter
+    - which hicup_mapper
+
+about:
+  home: https://www.bioinformatics.babraham.ac.uk/projects/hicup/
+  license: GPLv3
+  license_family: GPL3
+  license_file: LICENSE
+  summary: HiCUP is a bioinformatics pipeline for processing Hi-C data.
+  doc_url: http://www.bioinformatics.babraham.ac.uk/projects/hicup/read_the_docs/html/index.html
+
+extra:
+  recipe-maintainers:
+    - jrhawley
