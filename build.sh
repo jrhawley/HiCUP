@@ -13,6 +13,7 @@ cp -R * $outdir
 
 cd $outdir
 
+# copy all perl files and hicup_module.pm
 for p in hicup_module.pm $(grep -l -R "usr/bin/perl" . ); do
 
   # Fix shebang lines
@@ -26,4 +27,17 @@ for p in hicup_module.pm $(grep -l -R "usr/bin/perl" . ); do
   sed -i.bak "s/\$RealBin/\$RealBin/g" $p
 
   ln -s $outdir/$p $PREFIX/bin
+done
+
+# copy all R scripts
+
+for p in r_scripts/*; do
+  # Convert $RealBin to $RealBin so that links to the bin dir will be resolved.
+  # This way we can symlink just the perl scripts in $PREFIX/bin and they can
+  # find all the extra stuff (R scripts, etc) they need over in $PREFIX/share
+  #
+  # See http://perldoc.perl.org/FindBin.html
+  sed -i.bak "s/\$RealBin/\$RealBin/g" $p
+
+  ln -s $outdir/$p $PREFIX/bin/r_scripts
 done
