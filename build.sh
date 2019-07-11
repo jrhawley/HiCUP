@@ -32,5 +32,5 @@ done
 # copy all R scripts
 for p in r_scripts/*; do
   mkdir -p $PREFIX/bin/r_scripts/
-  ln -s $outdir/$p $PREFIX/bin/r_scripts/
+  cp $outdir/$p $PREFIX/bin/r_scripts/
 done
